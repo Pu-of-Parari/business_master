@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+  <!-- Form
+  ================================================== -->
+<div class="form">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <p class="lead">
+          <form action="/post" method="post" class="form-inline">
+            <label for="name">敬語ジェネレータ</label>
+            <textarea name="name" rows="4" cols="40" id="name" class="form-control" placeholder="write text here"></textarea><br>
+            <button type="submit" class="btn btn-default">変換</button>
+          </form>
+          {% if name %}
+            <br>
+            変換前 >><br>
+            {{ name }}
+            <hr>
+            変換後 >><br>
+            {{ name_ }} 
+          {% else %}
+            {{ message }}
+          {% endif %}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

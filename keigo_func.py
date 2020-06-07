@@ -6,9 +6,25 @@ import configparser
 import codecs
 import csv
 
-from api_sample import CotohaApi
+from api_func import CotohaApi
 
 DICT_DIR = "./keigo_dict.csv"
+
+
+# ソースファイルの場所取得
+APP_ROOT = os.path.dirname(os.path.abspath(__file__)) + "/"
+
+# 設定値取得
+config = configparser.ConfigParser()
+config.read(APP_ROOT + "config.ini")
+CLIENT_ID = config.get("COTOHA API", "Developer Client id")
+CLIENT_SECRET = config.get("COTOHA API", "Developer Client secret")
+DEVELOPER_API_BASE_URL = config.get("COTOHA API", "Developer API Base URL")
+ACCESS_TOKEN_PUBLISH_URL = config.get("COTOHA API", "Access Token Publish URL")
+
+# COTOHA APIインスタンス生成
+cotoha_api = CotohaApi(CLIENT_ID, CLIENT_SECRET, DEVELOPER_API_BASE_URL, ACCESS_TOKEN_PUBLISH_URL)
+
 
 def loadDict():
     dict_dir = DICT_DIR
@@ -180,42 +196,3 @@ def politize(sentence):
 
 
 
-
-if __name__ == '__main__':
-    # ソースファイルの場所取得
-    APP_ROOT = os.path.dirname(os.path.abspath(__file__)) + "/"
-
-    # 設定値取得
-    config = configparser.ConfigParser()
-    config.read(APP_ROOT + "config.ini")
-    CLIENT_ID = config.get("COTOHA API", "Developer Client id")
-    CLIENT_SECRET = config.get("COTOHA API", "Developer Client secret")
-    DEVELOPER_API_BASE_URL = config.get("COTOHA API", "Developer API Base URL")
-    ACCESS_TOKEN_PUBLISH_URL = config.get("COTOHA API", "Access Token Publish URL")
-
-    # COTOHA APIインスタンス生成
-    cotoha_api = CotohaApi(CLIENT_ID, CLIENT_SECRET, DEVELOPER_API_BASE_URL, ACCESS_TOKEN_PUBLISH_URL)
-    
-    # 解析対象文
-    sentence = "マジでやっておくよ。やばいです"
-    #sentence = str(input("input>>>"))
-    #sentence = "部長っちへういっすー！朝から、完全にぽんぽんペインで、つらみが深いので、一日お布団でスヤァしておきます。明日は行けたら行くマンです！"
-    print("input>>",sentence)
-
-    # 感情析API実行
-    emo_result = cotoha_api.sentimentType(sentence)
-    #print(emo_result)
-    # 感情分析結果出力
-    emo = emo_result['result']['sentiment']
-    emoPhrase = emo_result['result']['emotional_phrase']
-    print(emo)
-    for i, p in enumerate(emoPhrase):
-        print(p)
-    
-    # 敬語付与
-    poli_sent = politize(sentence)
-    print(poli_sent)
-    
-
-
-    
