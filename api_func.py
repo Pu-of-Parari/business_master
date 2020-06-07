@@ -336,6 +336,7 @@ class CotohaApi:
         return res_body
 
 """
+# 検証用
 if __name__ == '__main__':
     # ソースファイルの場所取得
     APP_ROOT = os.path.dirname(os.path.abspath(__file__)) + "/"

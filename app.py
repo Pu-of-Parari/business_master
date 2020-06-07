@@ -21,7 +21,7 @@ def index():
 def post():
     title = "敬語ジェネレータ"
     if request.method == 'POST':
-        # リクエストフォームから「名前」を取得
+        # リクエストフォームからテキストを取得
         name_in = request.form['name']
         name_out = politize(name_in)
         # index.html をレンダリングする

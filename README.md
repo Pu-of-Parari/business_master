@@ -18,7 +18,7 @@ $ python app.py
 
 ```
 
-- ブラウザから`localhost:5000`にアクセス
+- 実行後、ブラウザから`localhost:5000`にアクセス
 
 
 
