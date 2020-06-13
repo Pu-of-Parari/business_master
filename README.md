@@ -22,14 +22,11 @@ $ python app.py
 
 ```
 
-- 実行後、ブラウザから[localhost:5000](localhost:5000)にアクセス
+- 実行後、ブラウザから[localhost:5000](http://localhost:5000)にアクセス
 
-
-
-
-![image](demo_img.png)
-
-デモイメージ
+| ![demo_image](./demo_img.png) |
+| :---------------------------: |
+|        *デモイメージ*         |
 
 ## 目的
 
