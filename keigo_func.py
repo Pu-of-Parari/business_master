@@ -78,15 +78,18 @@ def politize(sentence):
             
             tok_form = replaceKeigo(tok_form, DICT_LIST)
             
+            v_flag = 0
+
             print(tok_form,"\t",tok_pos,"\t",tok_features)
             
             # 以下ルール
             # 食べる->食べます、食べた->食べました
-            if tok_pos == "動詞接尾辞" and "終止" in tok_features:
+            if tok_pos == "動詞接尾辞" and ("終止" in tok_features or "接続" in tok_features):
                 if tok_form == "た": tok_form = "ました"
                 elif tok_form == "たい": tok_form = "たいです"
                 #elif tok_form == "う": tok_form = "ましょう"
                 elif tok_form == "ない" or tok_form == "ません": tok_form = "ません"
+                elif tok_form == "する": tok_form = "します"
                 else: tok_form = "ます"
             
             if tok_pos == "判定詞" and ("終止" in tok_features):
@@ -184,7 +187,8 @@ def politize(sentence):
                 tok_form = "かったです"
             
             if tok_pos == "接続接尾辞" and "終止" in tok_features:
-                tok_form = "でしょう"
+                if tok_form == "わ": tok_form = ""
+                else: tok_form = "でしょう"
 
 
             polite_sent += tok_form
